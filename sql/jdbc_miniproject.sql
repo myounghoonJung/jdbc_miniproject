@@ -31,8 +31,8 @@ create table tbl_user(
     gender char(1) check (gender in ('M','F')) not null,
     age number not null,
     phone varchar2(13) not null,
-    borrowpresentcount number,
-    borrowhistorycount number,
+    borrowpresentcount number default 0,
+    borrowhistorycount number default 0,
     enrolldate date default sysdate
 );
 
@@ -78,8 +78,8 @@ create or replace trigger trg_user_quit
     delete on tbl_user
     for each row
 begin
-    insert into tbl_user_quit (userid,userpw,username,gender,phone,borrowhistorycount,enrolldate) 
-    values (:old.userid,:old.userpw,:old.username,:old.gender,:old.phone,:old.borrowhistorycount,:old.enrolldate);
+    insert into tbl_user_quit (userid,userpw,username,gender,age,phone,borrowhistorycount,enrolldate) 
+    values (:old.userid,:old.userpw,:old.username,:old.gender,:old.age,:old.phone,:old.borrowhistorycount,:old.enrolldate);
 end;
 /
 
@@ -90,7 +90,7 @@ create or replace trigger trg_borrow_log
 begin
     insert into tbl_borrow_log (logno,bookno,booktitle,author,publisher,genre,borrowdate,returndate,status,borrowuserid)
     values (seq_borrow_log.nextval,:new.bookno,:new.booktitle,:new.author,:new.publisher,:new.genre,:new.borrowdate,:new.returndate
-            ,:new.status,:new.borrowuserid);
+            ,:new.status,:old.borrowuserid);
 end;
 /
 
