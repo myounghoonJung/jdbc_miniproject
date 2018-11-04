@@ -1,5 +1,7 @@
 package library.model.vo;
 
+import java.sql.Date;
+
 public class User {
 	
 	private String userId; // 아이디
@@ -11,6 +13,8 @@ public class User {
 
 	private int borrowPresentCount; // 유저가 현재 대출한 책 권수, 최대 3권까지 가능
 	private int borrowHistoryCount; // 유저가 총 대출한 책 권수
+	
+	private Date enrollDate; // 가입 날짜
 	
 	public User() {}
 	
@@ -24,7 +28,7 @@ public class User {
 	}
 	
 	public User(String userId, String userPw, String userName, String gender, int age, String phone,
-			int borrowHistoryCount) {
+			int borrowHistoryCount, Date enrollDate) {
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
@@ -32,6 +36,7 @@ public class User {
 		this.age = age;
 		this.phone = phone;
 		this.borrowHistoryCount = borrowHistoryCount;
+		this.enrollDate = enrollDate;
 	}
 
 	public String getUserId() {
@@ -68,7 +73,7 @@ public class User {
 		return phone;
 	}
 	public void setPhone(String phone) {
-		phone = phone;
+		this.phone = phone;
 	}
 	public int getBorrowPresentCount() {
 		return borrowPresentCount;
@@ -82,12 +87,18 @@ public class User {
 	public void setBorrowHistoryCount(int borrowHistoryCount) {
 		this.borrowHistoryCount = borrowHistoryCount;
 	}
+	public Date getEnrollDate() {
+		return enrollDate;
+	}
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
+	}
 
 	@Override
 	public String toString() {
 		return userId + "\t" + userPw + "\t" + userName
 				+ "\t" + gender + "\t" + age + "\t" + phone + "\t"
-				+ borrowPresentCount + "\t" + borrowHistoryCount;
+				+ borrowPresentCount + "\t" + borrowHistoryCount + "\t" + enrollDate;
 	}
 	
 	

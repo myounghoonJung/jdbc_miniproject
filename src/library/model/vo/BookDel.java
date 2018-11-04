@@ -22,7 +22,8 @@ public class BookDel extends Book {
 
 	@Override
 	public String toString() {
-		return super.toString() + "\t" + delDate;
+		return super.getBookNo() + "\t" + super.getBookTitle() + "\t" + super.getAuthor() + "\t" + super.getPublisher()
+				+ "\t" + super.getGenre() + "\t" + delDate;
 	}
 	
 	
